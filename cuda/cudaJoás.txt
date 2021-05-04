@@ -17,20 +17,23 @@ def my_kernel(matriz, matriz2):
 
     i = 0
     count = 0
-    
-    for i in range(len(matriz)):
 
-        numeros = matriz[i]
+    if pos < len(matriz): 
+      numeros = matriz[pos] 
 
-        for n in matriz:
-            if(numeros == n):
-                count = count + 1
+      for i in range(len(matriz)):
 
-        matriz2[numeros-1] = count
+          numeros = matriz[i]
 
-        count = 0
+          for n in matriz:
+              if(numeros == n):
+                  count = count + 1
 
-        i+=1 
+          matriz2[numeros-1] = count
+
+          count = 0
+
+          i+=1 
 
 
 # vetor com números
@@ -47,9 +50,12 @@ blocks_per_grid = ( len(data) + (threads_per_block - 1) )
 # iniciando o kernel
 my_kernel[blocks_per_grid, threads_per_block]( data, o_array )
 
+valor = 0
 # mostra o resultado
 for i in range(len(o_array)):
+  
   print(f"O número {i+1} apareceu {o_array[i]} vezes!")
-
+  valor+= o_array[i]
+print( f"A soma das Threads: {valor}" )
 
 
